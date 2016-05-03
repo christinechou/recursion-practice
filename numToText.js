@@ -46,4 +46,40 @@ var numToText = function(str) {
    }
    return result;
 };
+
+// Alternative method:
+
+var numToText = function(str, result) { 
+   var result = result || [];
+   if (typeof str === 'string') { 
+      str = str.split(' ');
+   }
+   var numbers = {
+      1: 'one',
+      2: 'two',
+      3: 'three',
+      4: 'four',
+      5: 'five',
+      6: 'six',
+      7: 'seven',
+      8: 'eight',
+      9: 'nine'
+   }
+
+   if (str.length === 0) {
+      return result.join(' ')
+   }
+   else {
+      var firstWord = str[0];
+      if (numbers.hasOwnProperty(firstWord)) {
+         result = result.concat(numbers[firstWord]);
+         return numToText(str.slice(1), result);
+      }
+      else {
+         result = result.concat(str[0]);
+         return numToText(str.slice(1), result);
+      }
+   }
+};
+
 console.log(numToText("I have 2 dogs and 5 cats"))
